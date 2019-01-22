@@ -1,19 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const signupHandler = require('./signup');
-const loginHandler = require('./login');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const loginValidation = require('../middlewares/loginValidation');
 const twoFA = require('../middlewares/twoFA');
 const contentUpload = require('./contentUpload');
 
-router
-	.post('/register', (req, res) => signupHandler(req, res))
-	.post('/login', loginValidation, twoFA, (req, res) => loginHandler(req, res))
-	.post('/images', (req, res) => contentUpload(req, res))
-	.get('/images', (req, res) => {})
-	.post('/secret', isLoggedIn, (req, res) => {
-		res.status(200).json({ content: 'Hello, world!' });
-	});
+router.get('/', isLoggedIn, (req, res) => {
+	const { token: tokenReq } = req.body;
+	const token = tokenReq.split(' ')[1];
+	const decoded = jwt.verify(token, 'secret');
+	const { id } = decoded;
+
+	if (!id) return res.status(403).send('Bad token');
+
+	const user = await User.findById(id);
+
+	if (user) return next();
+
+	res.status(500).send('Smth bad with auth to secret pages');
+});
 
 module.exports = router;
