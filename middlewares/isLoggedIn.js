@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
 	const decoded = jwt.verify(token, 'secret');
 	const { id } = decoded;
 
-	if (!id) return res.staus(403).send('Bad token');
+	if (!id) return res.status(403).send('Bad token');
 
 	const user = await User.findById(id);
 

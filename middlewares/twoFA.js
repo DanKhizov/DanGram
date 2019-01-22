@@ -17,8 +17,7 @@ module.exports = async (req, res, next) => {
 
 	if (clientTwoFA) {
 		const { uniqKey, answer: clientAnswer } = clientTwoFA;
-		const serverTwoFA = await Validation.findOne({ uniqKey });
-		const { answer: serverAnswer } = serverTwoFA;
+		const { answer: serverAnswer } = await Validation.findOne({ uniqKey });
 
 		if (serverAnswer !== clientAnswer) {
 			return res.status(404).json({ twoFA: 'Code is not matching' });

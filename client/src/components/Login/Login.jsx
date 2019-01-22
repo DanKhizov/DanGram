@@ -57,7 +57,7 @@ class Login extends Component {
 
 	render() {
 		const { errors } = this.state;
-		const uniqKey = localStorage.getItem('uniqKey');
+		// const uniqKey = localStorage.getItem('uniqKey');
 
 		return (
 			<div className="container login" style={{ marginTop: '50px' }}>
