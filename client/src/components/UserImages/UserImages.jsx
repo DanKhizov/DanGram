@@ -19,8 +19,6 @@ export default class UserImages extends Component {
 	};
 
 	render() {
-		console.log(this.state);
-
 		return (
 			<div>
 				<h1>Your images</h1>

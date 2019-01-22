@@ -8,14 +8,15 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './store/actions/authentication';
 
-import Navbar from './components/Navbar/Navbar';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import NotFound from './components/NotFound/NotFound';
+import Navbar from './components/MainNavbar/';
+import Register from './components/Register/';
+import Login from './components/Login/';
+import Home from './components/Home/';
+import NotFound from './components/NotFound/';
 import Secret from './components/Secret';
 import ImageList from './components/ImageList';
-import UserImages from './components/UserImages/UserImages';
+import UserImages from './components/UserImages/';
+import Profile from './components/Profile';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
@@ -39,10 +40,11 @@ class App extends Component {
 						<div className="container">
 							<Switch>
 								<Route exact path="/" component={Home} />
-								<Route exact path="/register" component={Register} />
-								<Route exact path="/login" component={Login} />
-								<Route exact path="/secret" component={Secret} />
-								<Route exact path="/images" component={ImageList} />
+								<Route exact path="/register/" component={Register} />
+								<Route exact path="/login/" component={Login} />
+								<Route exact path="/secret/" component={Secret} />
+								<Route exact path="/images/" component={ImageList} />
+								<Route exact path="/profile/" component={Profile} />
 								<Route exact path="/profile/images" component={UserImages} />
 
 								<Route component={NotFound} />

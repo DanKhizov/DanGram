@@ -15,17 +15,24 @@ export const registerUser = (user, history) => dispatch => {
 		});
 };
 
-export const loginUser = user => dispatch => {
+export const loginUser = user => async dispatch => {
 	axios
 		.post('/api/users/login', user)
 		.then(res => {
-			const { token } = res.data;
-			localStorage.setItem('jwtToken', token);
-			setAuthToken(token);
+			const { token, uniqKey } = res.data;
 
-			const decoded = jwt_decode(token);
-			console.log(decoded);
-			dispatch(setCurrentUser(decoded));
+			if (token && !uniqKey) {
+				localStorage.setItem('jwtToken', token);
+				localStorage.removeItem('uniqKey');
+				setAuthToken(token);
+
+				const decoded = jwt_decode(token);
+				dispatch(setCurrentUser(decoded));
+			}
+
+			if (!token && uniqKey) {
+				localStorage.setItem('uniqKey', uniqKey);
+			}
 		})
 		.catch(err => {
 			dispatch({
