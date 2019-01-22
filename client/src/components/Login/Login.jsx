@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Login.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/actions/authentication';
@@ -9,7 +10,6 @@ class Login extends Component {
 		password: '',
 		answer: '',
 		errors: {},
-		show2FA: true,
 	};
 
 	handleInputChange = e => {
@@ -31,12 +31,23 @@ class Login extends Component {
 		if (this.props.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
+
+		const uniqKey = localStorage.getItem('uniqKey');
+		if (uniqKey) {
+			this.setState(state => {
+				return {
+					...state,
+					show2FA: true,
+				};
+			});
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
+
 		if (nextProps.errors) {
 			this.setState({
 				errors: nextProps.errors,
@@ -45,10 +56,12 @@ class Login extends Component {
 	}
 
 	render() {
-		const { errors, show2FA } = this.state;
+		const { errors } = this.state;
+		const uniqKey = localStorage.getItem('uniqKey');
+
 		return (
-			<div className="container" style={{ marginTop: '50px', width: '700px' }}>
-				<h2 style={{ marginBottom: '40px' }}>Login</h2>
+			<div className="container login" style={{ marginTop: '50px' }}>
+				<h2>Login</h2>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
 						<input
@@ -76,7 +89,9 @@ class Login extends Component {
 							<div className="invalid-feedback">{errors.password}</div>
 						)}
 					</div>
-					{show2FA && (
+
+					{/* Debug */}
+					{true && (
 						<div className="form-group">
 							<input
 								type="text"

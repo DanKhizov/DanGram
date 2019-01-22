@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,34 +6,32 @@ import { logoutUser } from '../../store/actions/authentication';
 import { withRouter } from 'react-router-dom';
 import { MenuItem, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap';
 
-class MainNavbar extends Component {
-	render() {
-		const { isAuthenticated } = this.props.auth;
+const MainNavbar = props => {
+	const { isAuthenticated } = props.auth;
 
-		return (
-			<Navbar inverse fluid collapseOnSelect style={{ borderRadius: '0px' }}>
-				<Navbar.Header>
-					<Navbar.Brand>
-						<Link className="navbar-brand" to="/">
-							Redux Node Auth
-						</Link>
-					</Navbar.Brand>
-					<Navbar.Toggle />
-				</Navbar.Header>
-				<Navbar.Collapse>
-					<Nav>
-						<Link className="navbar-brand" to="/images">
-							Images
-						</Link>
-					</Nav>
-					<Nav pullRight>
-						{isAuthenticated ? <AuthLinks {...this.props} /> : <GuestLinks />}
-					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
-		);
-	}
-}
+	return (
+		<Navbar inverse fluid collapseOnSelect style={{ borderRadius: '0px' }}>
+			<Navbar.Header>
+				<Navbar.Brand>
+					<Link className="navbar-brand" to="/">
+						Redux Node Auth
+					</Link>
+				</Navbar.Brand>
+				<Navbar.Toggle />
+			</Navbar.Header>
+			<Navbar.Collapse>
+				<Nav>
+					<Link className="navbar-brand" to="/images">
+						Images
+					</Link>
+				</Nav>
+				<Nav pullRight>
+					{isAuthenticated ? <AuthLinks {...props} /> : <GuestLinks />}
+				</Nav>
+			</Navbar.Collapse>
+		</Navbar>
+	);
+};
 
 MainNavbar.propTypes = {
 	logoutUser: PropTypes.func.isRequired,
@@ -73,11 +71,8 @@ const AuthLinks = props => {
 			<NavDropdown title={avatar} id="basic-nav-dropdown">
 				<li style={{ marginLeft: '2rem' }}>
 					<h6>
-						Signed in as <b>{user.name}</b>
+						Signed in as <br /> <b>{user.name}</b>
 					</h6>
-				</li>
-				<li>
-					<Link to="/profile">Your status</Link>
 				</li>
 				<MenuItem divider />
 				<li>

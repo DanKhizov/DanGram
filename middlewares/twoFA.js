@@ -24,7 +24,8 @@ module.exports = async (req, res, next) => {
 			return res.status(404).json({ twoFA: 'Code is not matching' });
 		}
 
-		await Validation.findByIdAndDelete(serverTwoFA.id);
+		await Validation.findByIdAndDelete(serverTwoFA._id);
+
 		return next();
 	} else {
 		console.log('WATCH IT!!!!!!!!!!!! SMTH CRASHED');
