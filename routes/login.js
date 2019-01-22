@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const expiresIn = '1d';
 const User = require('../models/User');
