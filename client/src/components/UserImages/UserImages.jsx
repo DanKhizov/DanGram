@@ -3,7 +3,7 @@ import "./UserImages.css";
 import axios from "axios";
 import { Jumbotron } from "react-bootstrap";
 
-export default class UserImages extends Component {
+class UserImages extends Component {
   state = {
     selectedFile: null
   };
@@ -36,7 +36,7 @@ export default class UserImages extends Component {
   }
 
   render() {
-    const imgURL = "http://localhost:5000/api/gallery/image/";
+    const imgURL = "http://localhost:5000/api/files/";
 
     return (
       <div>
@@ -51,8 +51,10 @@ export default class UserImages extends Component {
           <label htmlFor="file">Upload image</label>
         </Jumbotron>
         <h1>Your images</h1>
-        <img src={`${imgURL}8726e41e054a532ea368bb994469795f.jpg`} alt="" />
+        <img src={`${imgURL}88fbd4dfeb5e30c62461b1001d912162.jpg`} alt="" />
       </div>
     );
   }
 }
+
+export default UserImages;
