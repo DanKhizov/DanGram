@@ -1,6 +1,6 @@
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
-const validateRegisterInput = require("../../validations/register");
+const validateRegisterInput = require("../../validations/auth/register");
 const User = require("../../models/User");
 
 module.exports = async (req, res) => {

@@ -13,7 +13,7 @@ export default class UserImages extends Component {
   }
 
   getUsersImages = async () => {
-    const res = await axios.get("/api/gallery/files");
+    const res = await axios.get("/api/files/allFiles");
     console.log(res.data);
   };
 
@@ -25,7 +25,7 @@ export default class UserImages extends Component {
     const { selectedFile } = this.state;
     const fd = new FormData();
     fd.append("file", selectedFile, selectedFile.name);
-    const res = await axios.post("/api/gallery/upload", fd);
+    const res = await axios.post("/api/files/upload", fd);
     console.log(res);
   };
 
@@ -51,7 +51,7 @@ export default class UserImages extends Component {
           <label htmlFor="file">Upload image</label>
         </Jumbotron>
         <h1>Your images</h1>
-        <img src={`${imgURL}432520c5d0d5b914cec6ae7a4559ea6c.jpg`} alt="" />
+        <img src={`${imgURL}8726e41e054a532ea368bb994469795f.jpg`} alt="" />
       </div>
     );
   }

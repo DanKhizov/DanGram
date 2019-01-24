@@ -1,15 +1,18 @@
-const { Schema, model } = require('mongoose');
-const uuidv1 = require('uuid/v1');
-const cryptoRandomString = require('crypto-random-string');
+const { Schema, model } = require("mongoose");
 
-const ValidationSchema = new Schema({
-	uniqKey: { type: String, required: true, default: uuidv1() },
-	answer: {
-		type: String,
-		required: true,
-		default: cryptoRandomString(6).toUpperCase(),
-	},
-	user: { type: Schema.Types.ObjectId, required: true },
+const fileSchema = new Schema({
+  doc_id: {
+    type: String
+  },
+  length: {
+    type: Number
+  },
+  name: {
+    type: String
+  },
+  type: {
+    type: String
+  }
 });
 
-module.exports = model('validations', ValidationSchema);
+module.exports = model("files", fileSchema);
