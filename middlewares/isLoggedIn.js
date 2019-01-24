@@ -1,20 +1,16 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require("../models/User");
+const extractIdFromToken = require("../helpers/extractIdFromToken");
 
 module.exports = async (req, res, next) => {
-	const { token: tokenReq } = req.body;
+  const { token: tokenReq } = req.body;
 
-	if (!tokenReq) return res.status(401).send('You must be auth');
+  if (!tokenReq) return res.status(401).send("You must be auth");
 
-	const token = tokenReq.split(' ')[1];
-	const decoded = jwt.verify(token, 'secret');
-	const { id } = decoded;
+  const id = extractIdFromToken(tokenReq);
+  if (!id) return res.status(403).send("Bad token");
 
-	if (!id) return res.status(403).send('Bad token');
+  const user = await User.findById(id);
+  if (user) return next();
 
-	const user = await User.findById(id);
-
-	if (user) return next();
-
-	res.status(500).send('Smth bad with auth to secret pages');
+  res.status(500);
 };

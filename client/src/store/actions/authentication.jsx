@@ -1,57 +1,57 @@
-import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
-import setAuthToken from '../../setAuthToken';
-import jwt_decode from 'jwt-decode';
+import axios from "axios";
+import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import setAuthToken from "../../setAuthToken";
+import jwt_decode from "jwt-decode";
 
 export const registerUser = (user, history) => dispatch => {
-	axios
-		.post('/api/users/register', user)
-		.then(res => history.push('/login'))
-		.catch(err => {
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data,
-			});
-		});
+  axios
+    .post("/api/auth/register", user)
+    .then(res => history.push("/login"))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };
 
 export const loginUser = user => async dispatch => {
-	axios
-		.post('/api/users/login', user)
-		.then(res => {
-			const { token, uniqKey } = res.data;
+  axios
+    .post("/api/auth/login", user)
+    .then(res => {
+      const { token, uniqKey } = res.data;
 
-			if (token && !uniqKey) {
-				localStorage.setItem('jwtToken', token);
-				localStorage.removeItem('uniqKey');
-				setAuthToken(token);
+      if (token && !uniqKey) {
+        localStorage.setItem("jwtToken", token);
+        localStorage.removeItem("uniqKey");
+        setAuthToken(token);
 
-				const decoded = jwt_decode(token);
-				dispatch(setCurrentUser(decoded));
-			}
+        const decoded = jwt_decode(token);
+        dispatch(setCurrentUser(decoded));
+      }
 
-			if (!token && uniqKey) {
-				localStorage.setItem('uniqKey', uniqKey);
-			}
-		})
-		.catch(err => {
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data,
-			});
-		});
+      if (!token && uniqKey) {
+        localStorage.setItem("uniqKey", uniqKey);
+      }
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };
 
 export const setCurrentUser = decoded => {
-	return {
-		type: SET_CURRENT_USER,
-		payload: decoded,
-	};
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
 };
 
 export const logoutUser = history => dispatch => {
-	localStorage.removeItem('jwtToken');
-	setAuthToken(false);
-	dispatch(setCurrentUser({}));
-	history.push('/login');
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  dispatch(setCurrentUser({}));
+  history.push("/login");
 };

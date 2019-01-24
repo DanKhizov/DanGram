@@ -1,23 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const isLoggedIn = require('../middlewares/isLoggedIn');
-const loginValidation = require('../middlewares/loginValidation');
-const twoFA = require('../middlewares/twoFA');
-const contentUpload = require('./contentUpload');
+const isLoggedIn = require("../middlewares/isLoggedIn");
+const extractIdFromToken = require("../helpers/extractIdFromToken");
 
-router.get('/', isLoggedIn, (req, res) => {
-	const { token: tokenReq } = req.body;
-	const token = tokenReq.split(' ')[1];
-	const decoded = jwt.verify(token, 'secret');
-	const { id } = decoded;
+router.get("/", isLoggedIn, async (req, res) => {
+  const { token: tokenReq } = req.body;
+  const id = extractIdFromToken(tokenReq);
 
-	if (!id) return res.status(403).send('Bad token');
+  if (!id) return res.status(403).send("Bad token");
 
-	const user = await User.findById(id);
+  const user = await User.findById(id);
 
-	if (user) return next();
+  if (user) return next();
 
-	res.status(500).send('Smth bad with auth to secret pages');
+  res.status(500).send("Smth bad with gallery get");
 });
 
 module.exports = router;
