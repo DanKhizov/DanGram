@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
 const path = require("path");
-const crypto = require("crypto");
+const User = require("../../models/User");
 const GridFsStorage = require("multer-gridfs-storage");
 const multer = require("multer");
 const { dev } = require("../../config/config");
-const extractIdFromToken = require("../../helpers/auth/extractIdFromToken");
 const exractUserInfo = require("../../helpers/auth/exractUserInfo");
+const randomString = require("crypto-random-string");
 
 module.exports = router => {
   const conn = mongoose.connection;
@@ -19,37 +19,32 @@ module.exports = router => {
 
     const storage = new GridFsStorage({
       url: dev.dbURI,
-      file: (req, file) => {
+      file: async (req, file) => {
+        const filename = randomString(32) + path.extname(file.originalname);
         const { authorization } = req.headers;
         const { id, name, avatar } = exractUserInfo(authorization);
 
-        return new Promise((resolve, reject) => {
-          crypto.randomBytes(16, (err, buf) => {
-            if (err) return reject(err);
+        const user = { id, name, avatar };
+        const userDb = await User.findById({ _id: id });
 
-            const filename =
-              buf.toString("hex") + path.extname(file.originalname);
-            const fileInfo = {
-              filename,
-              bucketName: "uploads",
-              metadata: {
-                user: {
-                  id,
-                  name,
-                  avatar
-                }
-              }
-            };
-            resolve(fileInfo);
-          });
-        });
+        const fileInfo = {
+          filename,
+          bucketName: "uploads",
+          metadata: { user }
+        };
+
+        userDb.images.push(filename);
+        await userDb.save();
+
+        return fileInfo;
       }
     });
+
     const upload = multer({ storage });
 
-    router.post("/upload", upload.single("file"), (req, res) => {
+    router.post("/upload", upload.single("file"), async (req, res) => {
       const { file } = req;
-      res.json({ file });
+      res.status(200).json({ file });
     });
   });
 };

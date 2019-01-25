@@ -2,7 +2,8 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const auth = require("../routes/auth");
-const files = require("../routes/files/index");
+const files = require("../routes/files");
+const users = require("../routes/user");
 
 module.exports = app => {
   app.use(logger("dev"));
@@ -14,4 +15,5 @@ module.exports = app => {
   // Routes
   app.use("/api/auth/", auth);
   app.use("/api/files/", files);
+  app.use("/api/users/", users);
 };

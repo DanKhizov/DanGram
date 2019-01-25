@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import "./UserImages.css";
 import axios from "axios";
 import { Jumbotron } from "react-bootstrap";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import ImageList from "../ImageList/ImageList";
 
 class UserImages extends Component {
   state = {
-    selectedFile: null
+    selectedFile: null,
+    images: []
   };
 
   componentDidMount() {
@@ -13,8 +17,12 @@ class UserImages extends Component {
   }
 
   getUsersImages = async () => {
-    const res = await axios.get("/api/files/allFiles");
-    console.log(res.data);
+    const { id } = this.props.auth.user;
+
+    const res = await axios.get(`/api/users/${id}/images`);
+    const { images } = res.data;
+
+    this.setState({ images });
   };
 
   fileSelectHandler = e => {
@@ -36,7 +44,7 @@ class UserImages extends Component {
   }
 
   render() {
-    const imgURL = "http://localhost:5000/api/files/";
+    const { images } = this.state;
 
     return (
       <div>
@@ -51,10 +59,17 @@ class UserImages extends Component {
           <label htmlFor="file">Upload image</label>
         </Jumbotron>
         <h1>Your images</h1>
-        <img src={`${imgURL}88fbd4dfeb5e30c62461b1001d912162.jpg`} alt="" />
+        <ImageList images={images} />
       </div>
     );
   }
 }
 
-export default UserImages;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(UserImages));
