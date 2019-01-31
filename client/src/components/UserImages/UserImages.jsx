@@ -1,75 +1,63 @@
 import React, { Component } from "react";
 import "./UserImages.css";
-import axios from "axios";
-import { Jumbotron } from "react-bootstrap";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import ImageList from "../ImageList/ImageList";
 
-class UserImages extends Component {
-  state = {
-    selectedFile: null,
-    images: []
-  };
-
-  componentDidMount() {
-    this.getUsersImages();
-  }
-
-  getUsersImages = async () => {
-    const { id } = this.props.auth.user;
-
-    const res = await axios.get(`/api/users/${id}/images`);
-    const { images } = res.data;
-
-    this.setState({ images });
-  };
-
-  fileSelectHandler = e => {
-    this.setState({ selectedFile: e.target.files[0] });
-  };
-
-  fileUploadHandler = async () => {
-    const { selectedFile } = this.state;
-    const fd = new FormData();
-    fd.append("file", selectedFile, selectedFile.name);
-    const res = await axios.post("/api/files/upload", fd);
-    console.log(res);
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.selectedFile !== prevState.selectedFile) {
-      this.fileUploadHandler();
-    }
-  }
-
+export default class UserImages extends Component {
   render() {
-    const { images } = this.state;
+    const photo1 =
+      "https://pp.userapi.com/c845020/v845020731/14971e/k4lsGgvxyCE.jpg";
+    const photo2 =
+      "https://pp.userapi.com/c638020/v638020361/54840/zTGCLnccJzM.jpg";
+    const photo3 =
+      "https://pp.userapi.com/c840535/v840535464/8b2e9/jVtydR26GHM.jpg";
 
     return (
-      <div>
-        <Jumbotron>
-          <input
-            type="file"
-            onChange={this.fileSelectHandler}
-            name="file"
-            id="file"
-            className="inputfile"
-          />
-          <label htmlFor="file">Upload image</label>
-        </Jumbotron>
-        <h1>Your images</h1>
-        <ImageList images={images} />
+      <div className="posts">
+        <div className="box">
+          <img src={photo1} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo2} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
+        <div className="box">
+          <img src={photo3} alt="photo" />
+        </div>
       </div>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(UserImages));

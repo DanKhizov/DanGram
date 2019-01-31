@@ -21,15 +21,29 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  phone: {
+    type: String
+  },
   avatar: {
     type: String
   },
-  images: {
-    type: [String],
-    default: []
-  },
-  phone: {
-    type: String
+  content: {
+    posts: {
+      type: [Schema.Types.ObjectId],
+      default: []
+    },
+    followers: {
+      type: [Schema.Types.ObjectId],
+      default: []
+    },
+    following: {
+      type: [Schema.Types.ObjectId],
+      default: []
+    },
+    stories: {
+      type: [Schema.Types.ObjectId],
+      default: []
+    }
   }
 });
 

@@ -1,0 +1,55 @@
+.user-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 13rem;
+  margin: 2.5rem 0;
+}
+
+.user-info .avatar {
+  border-radius: 50%;
+  border: rgb(35, 85, 165) solid 0.2rem;
+  padding: 0.5rem;
+  margin: 0 auto;
+}
+
+.user-info .user-description {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-info .user-description .login {
+  color: #262626;
+  font-size: 28px;
+  font-weight: 100;
+}
+
+.user-info .user-description .follow-button {
+  margin-left: 30px;
+  display: inline-block;
+  padding: 4px;
+  background: #3897f0;
+  width: 70px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.user-info .social {
+  display: flex;
+  width: 70%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-info .user-description .status {
+  line-height: 2rem;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.user-info .user-description .status p {
+  line-height: 2rem;
+  font-size: 20px;
+  font-weight: 300;
+}

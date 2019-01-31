@@ -4,8 +4,8 @@ const User = require("../../models/User");
 module.exports = router => {
   router.get("/:id/images", async (req, res) => {
     const { id } = req.params;
-    const { images } = await User.findById(id);
+    const user = await User.findById(id);
 
-    res.json({ images });
+    res.json(user);
   });
 };

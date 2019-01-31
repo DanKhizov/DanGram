@@ -1,0 +1,49 @@
+.navbar {
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: white;
+  border-bottom: 1px solid #acacac;
+}
+
+.navbar .navbar-container {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .navbar-container .logo {
+  font-size: 2rem;
+}
+
+.navbar .navbar-container .search input {
+  width: 12rem;
+  padding: 0.35rem;
+  text-align: center;
+  border-radius: 5px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.navbar .navbar-container .auth {
+  display: flex;
+  align-items: center;
+  width: 8rem;
+  justify-content: space-between;
+}
+
+.navbar .navbar-container .auth .log-in {
+  background: #3897f0;
+  font-weight: 700;
+  color: white;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+}
+
+.navbar .navbar-container .auth .sign-up {
+  color: #3897f0;
+  font-weight: 600;
+}

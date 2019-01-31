@@ -1,22 +1,19 @@
 import React, { Component } from "react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store/index";
+import store from "../../store/index";
 import jwt_decode from "jwt-decode";
-import setAuthToken from "./setAuthToken";
-import { setCurrentUser, logoutUser } from "./store/actions/authentication";
+import setAuthToken from "../../setAuthToken";
+import { setCurrentUser, logoutUser } from "../../store/actions/authentication";
 
-import Navbar from "./components/MainNavbar/";
-import Register from "./components/Register/";
-import Login from "./components/Login/";
-import Home from "./components/Home/";
-import NotFound from "./components/NotFound/";
-import ImageList from "./components/ImageList";
-import UserImages from "./components/UserImages/";
-import Profile from "./components/Profile";
+import Navbar from "../Navbar";
+import Register from "../Register";
+import Login from "../Login";
+import Home from "../Home";
+import NotFound from "../NotFound";
+import UserPage from "../UserPage/UserPage";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -42,9 +39,7 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/register/" component={Register} />
                 <Route exact path="/login/" component={Login} />
-                <Route exact path="/images/" component={ImageList} />
-                <Route exact path="/profile/" component={Profile} />
-                <Route exact path="/profile/images" component={UserImages} />
+                <Route exact path="/:userId/" component={UserPage} />
 
                 <Route component={NotFound} />
               </Switch>

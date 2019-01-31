@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./Profile.css";
+import "./UserImages.css";
 import axios from "axios";
 import { Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ImageList from "../ImageList/ImageList";
 
-class Profile extends Component {
+class UserImages extends Component {
   state = {
     selectedFile: null,
     images: []
@@ -21,9 +21,8 @@ class Profile extends Component {
 
     const res = await axios.get(`/api/users/${id}/images`);
     const { images } = res.data;
-    if (images) {
-      this.setState({ images });
-    }
+
+    this.setState({ images });
   };
 
   fileSelectHandler = e => {
@@ -36,13 +35,10 @@ class Profile extends Component {
     fd.append("file", selectedFile, selectedFile.name);
     const res = await axios.post("/api/files/upload", fd);
     console.log(res);
-
-    this.getUsersImages();
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { selectedFile } = this.state;
-    if (selectedFile !== prevState.selectedFile) {
+    if (this.state.selectedFile !== prevState.selectedFile) {
       this.fileUploadHandler();
     }
   }
@@ -76,4 +72,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(withRouter(Profile));
+)(withRouter(UserImages));
