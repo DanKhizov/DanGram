@@ -1,0 +1,76 @@
+.register-page {
+  width: 350px;
+  display: flex;
+  margin: 5rem auto;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.register-page .description {
+  text-align: center;
+  color: #999;
+}
+
+.register-page .policy {
+  margin-top: 2rem;
+  width: 75%;
+  text-align: center;
+  color: #999;
+}
+
+.register-page .register-form {
+  background: white;
+  border: 1px solid #ececec;
+  margin: 1rem 0;
+  padding: 2.5rem;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 0.2rem;
+}
+
+.register-page .register-form h1 {
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 800;
+  font-family: "Pacifico", cursive;
+  width: 100%;
+  height: 1.6em;
+}
+
+.register-page .register-form form {
+  width: 100%;
+}
+
+.register-page .register-form .input-field {
+  width: 100%;
+  margin: 0.2rem 0;
+  padding: 0.35rem;
+  border-radius: 5px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.register-page .register-form .button-submit {
+  margin-top: 1rem;
+  width: 100%;
+  background: #3897f0;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.register-page .register-form .invalid {
+  color: red;
+  text-align: center;
+}
+
+.register-page .register-facebook {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #3b5998;
+}

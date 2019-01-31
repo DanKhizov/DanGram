@@ -1,24 +1,42 @@
 import React from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import AuthLinks from "./AuthLinks";
+import GuestLinks from "./GuestLinks";
+
+const Navbar = props => {
+  const { isAuthenticated } = props.auth;
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
-          <i class="camera retro icon" />
-          DanGram
+          <Link to="/">
+            <i className="camera retro icon" />
+            DanGram
+          </Link>
         </div>
         <div className="search">
           <input type="text" placeholder="Search" />
         </div>
-        <div className="auth">
-          <div className="log-in">Log in</div>
-          <div className="sign-up">Sign up</div>
-        </div>
+        {isAuthenticated ? <AuthLinks /> : <GuestLinks />}
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Navbar);

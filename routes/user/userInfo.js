@@ -8,4 +8,21 @@ module.exports = router => {
 
     res.json(user);
   });
+
+  router.get("/:userName", async (req, res) => {
+    const { userName } = req.params;
+    const user = await User.findOne({ name: userName });
+
+    if (!user) return res.status(404).json({ error: "Not found" });
+
+    const { content, name, avatar, status } = user;
+    const data = {
+      name,
+      avatar,
+      content,
+      status
+    };
+
+    res.json(data);
+  });
 };

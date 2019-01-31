@@ -17,6 +17,18 @@
 
 .navbar .navbar-container .logo {
   font-size: 2rem;
+
+  cursor: pointer;
+  font-style: italic;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+
+.navbar .navbar-container .logo a {
+  font-family: "Pacifico", cursive;
+  color: black;
 }
 
 .navbar .navbar-container .search input {
@@ -36,14 +48,33 @@
 }
 
 .navbar .navbar-container .auth .log-in {
+  cursor: pointer;
   background: #3897f0;
   font-weight: 700;
   color: white;
   padding: 0.4rem;
   border-radius: 0.3rem;
+  transition: 0.2s background;
+}
+
+.navbar .navbar-container .auth .nickname {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: black;
+}
+
+.navbar .navbar-container .auth .log-in:hover {
+  background: #3480be;
 }
 
 .navbar .navbar-container .auth .sign-up {
   color: #3897f0;
+  cursor: pointer;
   font-weight: 600;
+  transition: 0.2s color;
+}
+
+.navbar .navbar-container .auth .sign-up:hover {
+  color: #3480be;
 }

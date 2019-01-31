@@ -1,20 +1,19 @@
-import React from 'react';
-import './NotFound.css';
-import repairIcon from './repair.png';
+import React from "react";
+import "./NotFound.css";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
-	return (
-		<div className="error-msg">
-			<img src={repairIcon} alt="" className="repair-icon" />
-			<h1>404</h1>
-			<p>It's look like there is no such page</p>
-			<p>
-				Try redirect to <Link to="/">home page</Link>
-			</p>
-		</div>
-	);
+  return (
+    <div className="error-msg">
+      <h1>Sorry, this page isn't available.</h1>
+      <p>
+        The link you followed may be broken, or the page may have been removed.{" "}
+        <br />
+        Go back to <Link to="/">home page</Link>.
+      </p>
+    </div>
+  );
 };
 
 export default NotFound;

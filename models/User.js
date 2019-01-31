@@ -27,6 +27,10 @@ const UserSchema = new Schema({
   avatar: {
     type: String
   },
+  status: {
+    type: String,
+    default: "Hi, I joined DanGram just now"
+  },
   content: {
     posts: {
       type: [Schema.Types.ObjectId],

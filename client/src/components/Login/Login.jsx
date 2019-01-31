@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./Login.css";
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { loginUser } from "../../store/actions/authentication";
 
 class Login extends Component {
@@ -59,58 +61,63 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container login" style={{ marginTop: "50px" }}>
-        <h2>Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="email"
-              placeholder="Email"
-              className="form-control form-control-lg"
-              name="email"
-              onChange={this.handleInputChange}
-              value={this.state.email}
-            />
-            {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
-            )}
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              placeholder="Password"
-              className="form-control form-control-lg"
-              name="password"
-              onChange={this.handleInputChange}
-              value={this.state.password}
-            />
-            {errors.password && (
-              <div className="invalid-feedback">{errors.password}</div>
-            )}
-          </div>
-
-          {/* Debug */}
-          {true && (
+      <div className="login-page">
+        <div className="login-form">
+          <h1>DanGram</h1>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
-                type="text"
-                placeholder="Code from SMS"
-                name="answer"
-                className="form-control form-control-lg"
+                type="email"
+                placeholder="Email"
+                className="input-field"
+                name="email"
                 onChange={this.handleInputChange}
-                value={this.state.answer}
+                value={this.state.email}
               />
-              {errors.twoFA && (
-                <div className="invalid-feedback">{errors.twoFA}</div>
+              {errors.email && <div className="invalid">{errors.email}</div>}
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                placeholder="Password"
+                className="input-field"
+                name="password"
+                onChange={this.handleInputChange}
+                value={this.state.password}
+              />
+              {errors.password && (
+                <div className="invalid">{errors.password}</div>
               )}
             </div>
-          )}
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Login User
-            </button>
+            {true && (
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Code from SMS"
+                  name="answer"
+                  className="input-field"
+                  onChange={this.handleInputChange}
+                  value={this.state.answer}
+                />
+                {errors.twoFA && <div className="invalid">{errors.twoFA}</div>}
+              </div>
+            )}
+            <div className="form-group">
+              <button type="submit" className="button-submit">
+                Log in
+              </button>
+            </div>
+          </form>
+          <div className="login-facebook">
+            <i className="facebook icon" />
+            Login with Facebook
           </div>
-        </form>
+        </div>
+        <div className="login-form">
+          <p>
+            Don't have an account? <Link to="/register">Sign up</Link>
+          </p>
+        </div>
       </div>
     );
   }

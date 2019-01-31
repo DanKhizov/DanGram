@@ -1,7 +1,11 @@
 .error-msg {
-	text-align: center;
+  margin: 7.5rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
-.repair-icon {
-	width: 200px;
+.error-msg h1 {
+  font-weight: 700;
+  font-size: 1.9rem;
 }

@@ -21,3 +21,31 @@
   margin: auto;
   max-width: 100%;
 }
+
+h1 {
+  position: relative;
+  overflow: hidden;
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+}
+
+h1 > span {
+  display: inline-block;
+  color: #575757;
+}
+
+h1 > span:before,
+h1 > span:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  margin-top: 0.6em;
+}
+h1 > span:before {
+  margin-left: -102%;
+}
+h1 > span:after {
+  margin-left: 2%;
+}
