@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const User = require("../../models/User");
 
 module.exports = router => {
@@ -15,12 +14,13 @@ module.exports = router => {
 
     if (!user) return res.status(404).json({ error: "Not found" });
 
-    const { content, name, avatar, status } = user;
+    const { content, name, avatar, status, images } = user;
     const data = {
       name,
       avatar,
       content,
-      status
+      status,
+      images
     };
 
     res.json(data);

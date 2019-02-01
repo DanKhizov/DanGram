@@ -29,7 +29,11 @@ const UserSchema = new Schema({
   },
   status: {
     type: String,
-    default: "Hi, I joined DanGram just now"
+    default: "Hi there, I joined DanGram just now"
+  },
+  images: {
+    type: [String],
+    default: []
   },
   content: {
     posts: {

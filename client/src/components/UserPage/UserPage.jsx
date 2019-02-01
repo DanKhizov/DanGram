@@ -3,7 +3,7 @@ import "./UserPage.css";
 
 import UserInfo from "../UserInfo";
 import UserImages from "../UserImages";
-import { getUsersData } from "../../store/actions/dataTaker";
+import { getUsersData } from "../../store/actions/dataHandler";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import isEmpty from "../../isEmpty";

@@ -22,9 +22,9 @@ module.exports = router => {
       file: async (req, file) => {
         const filename = randomString(32) + path.extname(file.originalname);
         const { authorization } = req.headers;
-        const { id, name, avatar } = exractUserInfo(authorization);
+        const { id, name } = exractUserInfo(authorization);
 
-        const user = { id, name, avatar };
+        const user = { id, name };
         const userDb = await User.findById({ _id: id });
 
         const fileInfo = {
@@ -33,7 +33,8 @@ module.exports = router => {
           metadata: { user }
         };
 
-        userDb.images.push(filename);
+        userDb.images.unshift(filename);
+
         await userDb.save();
 
         return fileInfo;
@@ -43,8 +44,25 @@ module.exports = router => {
     const upload = multer({ storage });
 
     router.post("/upload", upload.single("file"), async (req, res) => {
-      const { file } = req;
-      res.status(200).json({ file });
+      console.log(1);
+
+      const { authorization } = req.headers;
+      const { name: userName } = exractUserInfo(authorization);
+
+      const user = await User.findOne({ name: userName });
+
+      if (!user) return res.status(404).json({ error: "Not found" });
+
+      const { content, name, avatar, status, images } = user;
+      const data = {
+        name,
+        avatar,
+        content,
+        status,
+        images
+      };
+
+      res.json(data);
     });
   });
 };

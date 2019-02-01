@@ -1,23 +1,26 @@
 import React from "react";
-import { Grid, Row, Col, Image } from "react-bootstrap";
+import { connect } from "react-redux";
 
-const ImageList = ({ images }) => {
-  const imgURL = "http://localhost:5000/api/files/";
+const ImageList = ({ data }) => {
+  const { images } = data;
+
+  const baseUrl = "http://localhost:5000/api/files/";
   const imageList = images.map(url => {
     return (
-      <Col md={4} sm={6} xs={12}>
-        <Image src={`${imgURL}${url}`} rounded responsive />
-      </Col>
+      <div className="box" key={url}>
+        <img src={`${baseUrl}${url}`} alt={url} />
+      </div>
     );
   });
 
-  return (
-    <div>
-      <Grid>
-        <Row>{imageList}</Row>
-      </Grid>
-    </div>
-  );
+  return imageList;
 };
 
-export default ImageList;
+const mapStateToProps = state => ({
+  data: state.dataPage
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(ImageList);

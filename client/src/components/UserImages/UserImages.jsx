@@ -3,18 +3,17 @@ import "./UserImages.css";
 import FileUploader from "../FileUploader";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { uploadFile } from "../../store/actions/fileHandler";
+import ImageList from "../ImageList";
 
 class UserImages extends Component {
   render() {
     const photo1 =
-      "https://pp.userapi.com/c845020/v845020731/14971e/k4lsGgvxyCE.jpg";
+      "http://localhost:5000/api/files/69dda0519d0910af7976e8d6fb1fb291.jpg";
     const photo2 =
       "https://pp.userapi.com/c638020/v638020361/54840/zTGCLnccJzM.jpg";
 
-    console.log(this.props.data);
-
     const isAuthor = this.props.auth.user.name === this.props.data.name;
-    console.log(isAuthor);
 
     return (
       <div>
@@ -23,12 +22,7 @@ class UserImages extends Component {
         </h1>
         {isAuthor ? <FileUploader /> : null}
         <div className="posts">
-          <div className="box">
-            <img src={photo1} alt="photo1" />
-          </div>
-          <div className="box">
-            <img src={photo2} alt="photo1" />
-          </div>
+          <ImageList />
         </div>
       </div>
     );
@@ -42,5 +36,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { uploadFile }
 )(withRouter(UserImages));
