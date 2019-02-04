@@ -2,16 +2,17 @@ import axios from "axios";
 import { TAKE_USERS_INFO } from "./types";
 
 export const getUsersData = nickname => async dispatch => {
+  let data;
+
   try {
     const res = await axios.get(`/api/users/${nickname}`);
-    dispatch({
-      type: TAKE_USERS_INFO,
-      payload: res.data
-    });
+    data = res.data;
   } catch (err) {
-    dispatch({
-      type: TAKE_USERS_INFO,
-      payload: err.response.data
-    });
+    data = err.response.data;
   }
+
+  dispatch({
+    type: TAKE_USERS_INFO,
+    payload: data
+  });
 };

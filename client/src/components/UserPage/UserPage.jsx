@@ -12,10 +12,11 @@ import NotFound from "../NotFound";
 
 class UserPage extends Component {
   componentDidMount() {
-    const { pathname } = this.props.history.location;
+    const { history, getUsersData } = this.props;
+    const { pathname } = history.location;
     const user = pathname.split(/^\//)[1];
 
-    this.props.getUsersData(user);
+    getUsersData(user);
   }
 
   render() {

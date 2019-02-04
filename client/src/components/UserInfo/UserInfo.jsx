@@ -4,12 +4,10 @@ import { connect } from "react-redux";
 
 class UserInfo extends Component {
   render() {
-    const { data } = this.props;
-
-    const { avatar, name, content, status: userStatus } = data;
-    const posts = content.posts.length;
-    const followers = content.followers.length;
-    const following = content.followers.length;
+    const { avatar, name, content, status: userStatus } = this.props.data;
+    const postsCount = content.posts.length;
+    const followersCount = content.followers.length;
+    const followingCount = content.followers.length;
 
     return (
       <div>
@@ -22,13 +20,13 @@ class UserInfo extends Component {
             </div>
             <div className="social">
               <span>
-                <b>{posts}</b> posts
+                <b>{postsCount}</b> posts
               </span>
               <span>
-                <b>{followers}</b> followers
+                <b>{followersCount}</b> followers
               </span>
               <span>
-                <b>{following}</b> following
+                <b>{followingCount}</b> following
               </span>
             </div>
             <div className="status">{userStatus}</div>
