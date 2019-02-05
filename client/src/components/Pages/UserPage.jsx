@@ -8,19 +8,20 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import isEmpty from "../../isEmpty";
 import Spinner from "../Spinner/Spinner";
-import NotFound from "../NotFound";
+import { NotFound } from "./";
 
 class UserPage extends Component {
-  componentDidMount() {
-    const { history, getUsersData } = this.props;
-    const { pathname } = history.location;
-    const user = pathname.split(/^\//)[1];
-
-    getUsersData(user);
-  }
+  componentDidMount() {}
 
   render() {
     const { data } = this.props;
+
+    // TODO !!!!!!!!!
+    const { history, getUsersData } = this.props;
+    const { pathname } = history.location;
+    const user = pathname.split(/^\//)[1];
+    if (user !== data.name) getUsersData(user);
+    // ==============
 
     if (isEmpty(data)) return <Spinner />;
     if (data.error) return <NotFound />;
