@@ -1,8 +1,6 @@
-# MetaGifter
+To start project:
 
-To run project:
+From root folder:
 
-1. From root folder "npm i"
-2. "cd client"
-3. "npm i"
-4. "cd .. & npm run dev"
+1. "docker-compose build"
+2. "docker-compose up"
