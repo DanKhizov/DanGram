@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 module.exports = config => {
   const { dbURI, dbParams } = config.dev;
 
-  mongoose.connect(
-    dbURI,
-    dbParams
-  );
+  mongoose.connect(dbURI, dbParams);
 
   mongoose.connection.on("connected", () => {
     console.log(`Mongoose connected to ${dbURI}`);

@@ -44,8 +44,6 @@ module.exports = router => {
     const upload = multer({ storage });
 
     router.post("/upload", upload.single("file"), async (req, res) => {
-      console.log(1);
-
       const { authorization } = req.headers;
       const { name: userName } = exractUserInfo(authorization);
 

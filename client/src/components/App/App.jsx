@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 import store from "../../store/index";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../setAuthToken";
@@ -12,8 +11,7 @@ import Navbar from "../Navbar";
 import Register from "../Register";
 import Login from "../Login";
 import Home from "../Home";
-import NotFound from "../NotFound";
-import UserPage from "../UserPage/UserPage";
+import { UserPage, NotFound } from "../Pages";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -30,23 +28,19 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div>
-            <Navbar />
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/register/" component={Register} />
-                <Route exact path="/login/" component={Login} />
-                <Route exact path="/:userId/" component={UserPage} />
+      <div>
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/register/" component={Register} />
+            <Route exact path="/login/" component={Login} />
+            <Route exact path="/:userId/" component={UserPage} />
 
-                <Route component={NotFound} />
-              </Switch>
-            </div>
-          </div>
-        </Router>
-      </Provider>
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </div>
     );
   }
 }
