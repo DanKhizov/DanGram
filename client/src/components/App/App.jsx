@@ -12,6 +12,7 @@ import Register from "../Register";
 import Login from "../Login";
 import Home from "../Home";
 import { UserPage, NotFound } from "../Pages";
+import Footer from "../Footer/Footer";
 
 class App extends Component {
 	componentDidMount() {
@@ -43,6 +44,7 @@ class App extends Component {
 						<Route component={NotFound} />
 					</Switch>
 				</div>
+				<Footer />
 			</div>
 		);
 	}

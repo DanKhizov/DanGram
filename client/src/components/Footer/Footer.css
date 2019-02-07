@@ -1,0 +1,32 @@
+.footer {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 2.5rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-weight: 600;
+	padding: 2.5rem 0;
+}
+
+.footer ul li {
+	list-style: none;
+	cursor: pointer;
+}
+
+.footer .list-left {
+	color: #003569;
+	width: 80%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.footer .list-right {
+	color: #999;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}

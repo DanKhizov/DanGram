@@ -1,51 +1,27 @@
-.posts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 22rem;
-  grid-gap: 2rem;
-  overflow: hidden;
-  justify-content: center;
-}
-
-.posts .box {
-  background: black;
-  text-align: center;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.posts img {
-  justify-content: center;
-  align-items: center;
-  display: block;
-  margin: auto;
-  max-width: 100%;
-}
-
 h1 {
-  position: relative;
-  overflow: hidden;
-  font-size: 24px;
-  font-weight: normal;
-  text-align: center;
+	position: relative;
+	overflow: hidden;
+	font-size: 24px;
+	font-weight: normal;
+	text-align: center;
 }
 
 h1 > span {
-  display: inline-block;
-  color: #575757;
+	display: inline-block;
+	color: #575757;
 }
 
 h1 > span:before,
 h1 > span:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-top: 1px solid rgba(10, 10, 10, 0.1);
-  margin-top: 0.6em;
+	content: "";
+	position: absolute;
+	width: 100%;
+	border-top: 1px solid rgba(10, 10, 10, 0.1);
+	margin-top: 0.6em;
 }
 h1 > span:before {
-  margin-left: -102%;
+	margin-left: -102%;
 }
 h1 > span:after {
-  margin-left: 2%;
+	margin-left: 2%;
 }
