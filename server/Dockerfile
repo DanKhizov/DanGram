@@ -1,12 +1,10 @@
 FROM node:alpine
 
-WORKDIR '/app'
+WORKDIR /app
 
-COPY package.json ./
-RUN npm install
-RUN npm audit fix
-COPY ./ ./
+ENV PATH /app/node_modules/.bin:$PATH
 
-EXPOSE 5000
+COPY package.json /app/package.json
+RUN npm install --silent
 
-CMD node server.js
+CMD ["nodemon", "server.js"]
