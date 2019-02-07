@@ -1,4 +1,7 @@
-export const GET_ERRORS = "GET_ERRORS";
+// AUTH
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_2FA_UUID = "SET_2FA_UUID";
+
 export const TAKE_USERS_INFO = "TAKE_USERS_INFO";
 export const USER_UPLOAD_FILE = "USER_UPLOAD_FILE";
