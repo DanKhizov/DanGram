@@ -1,5 +1,12 @@
 version: "3"
 services:
+  mongo:
+    container_name: mongo
+    restart: always
+    image: mongo
+    ports:
+      - "27017:27017"
+
   server:
     container_name: server
     build:
@@ -7,19 +14,20 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    volumes:
+      - "./server:/app"
+      - "/app/node_modules"
     links:
       - mongo
-  mongo:
-    container_name: mongo
-    restart: always
-    image: mongo
-    ports:
-      - "27017:27017"
+
   client:
     container_name: react
     build:
       context: ./client
       dockerfile: Dockerfile
+    volumes:
+      - "./client:/app"
+      - "/app/node_modules"
     ports:
       - "3000:3000"
     links:
