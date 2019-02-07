@@ -20,13 +20,15 @@ class Login extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+
 		const { email, password, answer } = this.state;
 		const user = { email, password };
-		const { uuid } = this.props.auth;
+		const { auth, tryLoginUser } = this.props;
+		const { uuid } = auth;
 
 		if (uuid) user.clientTwoFA = { uuid, answer };
 
-		this.props.tryLoginUser(user);
+		tryLoginUser(user);
 	};
 
 	componentDidMount() {
@@ -35,15 +37,15 @@ class Login extends Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.auth.isAuthenticated) {
-			this.props.history.push("/");
+	componentDidUpdate(prevProps) {
+		const { errors, auth, history } = this.props;
+
+		if (prevProps.auth.isAuthenticated !== auth.isAuthenticated) {
+			history.push("/");
 		}
 
-		if (nextProps.errors) {
-			this.setState({
-				errors: nextProps.errors,
-			});
+		if (prevProps.errors !== errors) {
+			this.setState({ errors });
 		}
 	}
 

@@ -1,0 +1,25 @@
+.posts {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 22rem;
+	grid-gap: 2rem;
+	overflow: hidden;
+	justify-content: center;
+}
+
+.posts .box {
+	background: black;
+	text-align: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.posts .box img {
+	justify-content: center;
+	align-items: center;
+	display: block;
+	max-width: 100%;
+}

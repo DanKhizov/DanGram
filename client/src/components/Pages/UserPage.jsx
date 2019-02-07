@@ -11,35 +11,39 @@ import Spinner from "../Spinner/Spinner";
 import { NotFound } from "./";
 
 class UserPage extends Component {
-  componentDidMount() {}
+	componentDidMount() {
+		const { user } = this.props.match.params;
+		this.props.getUsersData(user);
+	}
 
-  render() {
-    const { data } = this.props;
+	componentDidUpdate(prevProps) {
+		const { user } = this.props.match.params;
 
-    // TODO !!!!!!!!!
-    const { history, getUsersData } = this.props;
-    const { pathname } = history.location;
-    const user = pathname.split(/^\//)[1];
-    if (user !== data.name) getUsersData(user);
-    // ==============
+		if (user !== prevProps.match.params.user) {
+			this.props.getUsersData(user);
+		}
+	}
 
-    if (isEmpty(data)) return <Spinner />;
-    if (data.error) return <NotFound />;
+	render() {
+		const { data } = this.props;
 
-    return (
-      <div>
-        <UserInfo />
-        <UserImages />
-      </div>
-    );
-  }
+		if (isEmpty(data)) return <Spinner />;
+		if (data.error) return <NotFound />;
+
+		return (
+			<div>
+				<UserInfo />
+				<UserImages />
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => ({
-  data: state.dataPage
+	data: state.dataPage,
 });
 
 export default connect(
-  mapStateToProps,
-  { getUsersData }
+	mapStateToProps,
+	{ getUsersData }
 )(withRouter(UserPage));
